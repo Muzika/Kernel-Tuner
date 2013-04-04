@@ -19,13 +19,18 @@
 package rs.pedjaapps.KernelTuner.ui;
 
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.*;
 import android.os.*;
 import android.preference.*;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.*;
 import java.util.*;
 import rs.pedjaapps.KernelTuner.entry.*;
@@ -35,7 +40,7 @@ import android.view.View.OnClickListener;
 import rs.pedjaapps.KernelTuner.R;
 import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class TISActivity extends Activity {
+public class TISActivity extends SherlockActivity {
 
 	private List<TimesEntry> times;
 	
@@ -51,12 +56,10 @@ public class TISActivity extends Activity {
 		times = IOHelper.getTis();
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		String theme = preferences.getString("theme", "light");
-		setTheme(Tools.getPreferedTheme(theme));
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.times_in_state);
-			actionBar = getActionBar();
+			actionBar = getSupportActionBar();
 			actionBar.setDisplayHomeAsUpEnabled(true);
         
 		

@@ -12,6 +12,9 @@
     <string name="title_about">About</string>
     <string name="title_info">System Info</string>
     <string name="title_preferences">Settings</string>
+    <string name="title_backup_restore">Backup/Restore</string>
+    <string name="title_sd">SD Card Analyzer</string>
+    <string name="title_process">Process Details</string>
     <string name="app_name">Kernel Tuner</string>
     <string name="title_task_manager">Task Manager</string>
     <string name="preferences_boot_settings">Boot Settings</string>

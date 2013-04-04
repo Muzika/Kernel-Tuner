@@ -21,6 +21,7 @@ package rs.pedjaapps.KernelTuner.services;
 import android.app.*;
 import android.content.*;
 import android.os.*;
+import android.preference.PreferenceManager;
 import android.util.*;
 import java.io.*;
 import rs.pedjaapps.KernelTuner.*;
@@ -43,7 +44,7 @@ public class NotificationService extends Service
 	private String items;
 	private NotificationManager mNotificationManager;
 	private static final int NOTIFICATION_ID = 1;
-	private final static int PREFERENCES_MODE = Context.MODE_MULTI_PROCESS;
+	
 	
 	@Override
 	public IBinder onBind(Intent intent)
@@ -68,7 +69,7 @@ public class NotificationService extends Service
 	
 	private  final void getPrefs(){
 		
-		sharedPrefs = this.getSharedPreferences("rs.pedjaapps.KernelTuner_preferences", PREFERENCES_MODE);
+		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		items = sharedPrefs.getString("notif", "freq");
 		System.out.println(items);
 	}
@@ -194,7 +195,6 @@ public class NotificationService extends Service
 		super.onDestroy();
 	}	
 	
-@SuppressWarnings("deprecation")
 private  void createNotification(){
 	String ns = Context.NOTIFICATION_SERVICE;
 	mNotificationManager = (NotificationManager) getSystemService(ns);

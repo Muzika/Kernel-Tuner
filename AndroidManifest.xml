@@ -7,7 +7,7 @@
     android:versionName="4.4.6" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="9"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -27,20 +27,21 @@
             android:name=".ui.KernelTuner"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="adjustResize" >
+            android:theme="@style/Theme.Translucent.NoTitleBar.Sense5" >
             <intent-filter>
-                 <action android:name="rs.pedjaapps.KernelTuner.KT" />
-				<action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="rs.pedjaapps.KernelTuner.KT" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
+        	<activity
             android:name=".ui.TaskManager"
             android:icon="@drawable/tm"
-            android:label="Task Manager"
-            android:uiOptions="splitActionBarWhenNarrow" >
-            <intent-filter>
+            android:label="@string/title_task_manager"
+            android:theme="@style/Theme.Sense5"
+			android:uiOptions="splitActionBarWhenNarrow">
+			<intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.TM" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -48,7 +49,7 @@
         </activity>
         <activity
             android:name=".ui.TaskManagerDetailActivity"
-            android:label="Process Details"
+            android:label="@string/title_process"
             android:parentActivityName=".ui.TaskManager" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -57,7 +58,8 @@
         <activity
             android:name=".ui.SysCtl"
             android:icon="@drawable/sysctl"
-            android:label="SysCtl" >
+            android:label="@string/main_sysctl"
+            android:theme="@style/Theme.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.SYSCTL" />
 
@@ -68,6 +70,7 @@
             android:name=".ui.BuildpropEditor"
             android:icon="@drawable/build"
             android:label="Build.prop Editor"
+            android:theme="@style/Theme.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.BUILD" />
@@ -78,6 +81,7 @@
         <activity
             android:name=".ui.Preferences"
             android:icon="@drawable/settings"
+            android:theme="@style/Theme.Sense5"
             android:label="@string/title_preferences" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.KT" />
@@ -194,7 +198,7 @@
             android:name=".ui.Gpu"
             android:icon="@drawable/gpu"
             android:label="@string/title_gpu"
-            android:theme="@style/Theme.Sherlock.Light.Dialog.NoTitleBar" >
+            android:theme="@style/Theme.Translucent.NoTitleBar.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.GPU" />
 
@@ -205,6 +209,7 @@
             android:name=".ui.MiscTweaks"
             android:icon="@drawable/misc"
             android:label="@string/title_misc"
+            android:theme="@style/Theme.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.MISC_TWEAKS" />
@@ -216,6 +221,7 @@
             android:name=".ui.Mpdecision"
             android:icon="@drawable/dual"
             android:label="@string/title_mpdecision"
+            android:theme="@style/Theme.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.MPDECISION" />
@@ -227,6 +233,7 @@
             android:name=".ui.MpdecisionNew"
             android:icon="@drawable/dual"
             android:label="@string/title_mpdecision"
+            android:theme="@style/Theme.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.MPDECISION_NEW" />
@@ -238,6 +245,7 @@
             android:name=".ui.Thermald"
             android:icon="@drawable/temp"
             android:label="@string/title_thermald"
+            android:theme="@style/Theme.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.THERMAL" />
@@ -249,7 +257,7 @@
             android:name=".ui.About"
             android:icon="@drawable/about"
             android:label="@string/title_about"
-            android:theme="@style/Theme.Sherlock.Light.Dialog.NoTitleBar" >
+            android:theme="@style/Theme.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.About" />
 
@@ -260,7 +268,7 @@
             android:name=".ui.Changelog"
             android:icon="@drawable/changelog"
             android:label="@string/title_changelog"
-            android:theme="@style/Theme.TransparentDark"
+            android:theme="@style/Theme.Translucent.NoTitleBar.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.Changelog" />
@@ -271,12 +279,13 @@
         <activity
             android:name=".ui.CompatibilityCheck"
             android:label="@string/title_check"
-            android:theme="@style/Theme.TransparentNoTitle" >
+            android:theme="@style/Theme.Translucent.NoTitleBar.Sense5" >
         </activity>
         <activity
             android:name=".ui.Profiles"
             android:icon="@drawable/profile"
             android:label="@string/title_profiles"
+            android:theme="@style/Theme.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.PROFILES" />
@@ -288,11 +297,13 @@
             android:name=".ui.ProfileEditor"
             android:icon="@drawable/edit_dark"
             android:label="@string/activity_title_profile_editor"
+            android:theme="@style/Theme.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <activity
             android:name=".ui.SystemInfo"
             android:icon="@drawable/ic_menu_info_details"
+            android:theme="@style/Theme.Sense5"
             android:label="@string/info" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.SystemInfo" />
@@ -304,6 +315,7 @@
             android:name=".ui.CPUActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/title_cpu"
+            android:theme="@style/Theme.Sense5"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.CPU" />
@@ -315,7 +327,7 @@
             android:name=".ui.CPUActivityOld"
             android:icon="@drawable/ic_launcher"
             android:label="@string/title_cpu"
-            android:theme="@style/Theme.Sherlock.Light.Dialog.NoTitleBar" >
+            android:theme="@style/Theme.Translucent.NoTitleBar.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.CPU_MINIMAL" />
 
@@ -325,7 +337,8 @@
         <activity
             android:name=".ui.VoltageActivity"
             android:icon="@drawable/voltage"
-            android:label="@string/title_voltage" >
+            android:label="@string/title_voltage"
+            android:theme="@style/Theme.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.VOLTAGE" />
 
@@ -335,7 +348,8 @@
         <activity
             android:name=".ui.TISActivity"
             android:icon="@drawable/times"
-            android:label="@string/title_tis" >
+            android:label="@string/title_tis"
+            android:theme="@style/Theme.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.TIMES" />
 
@@ -345,7 +359,8 @@
         <activity
             android:name=".ui.Swap"
             android:icon="@drawable/swap"
-            android:label="Swap" >
+            android:label="@string/swap"
+            android:theme="@style/Theme.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.SWAP" />
 
@@ -355,7 +370,8 @@
         <activity
             android:name=".ui.GovernorActivity"
             android:icon="@drawable/dual"
-            android:label="@string/title_governor" >
+            android:label="@string/title_governor"
+            android:theme="@style/Theme.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.GOVERNOR_SETTINGS" />
 
@@ -375,8 +391,8 @@
         <activity
             android:name=".ui.OOM"
             android:icon="@drawable/oom"
-            android:label="OOM"
-            android:theme="@style/Theme.Dialog.NoTitleBar.Light" >
+            android:label="@string/oom"
+            android:theme="@style/Theme.Translucent.NoTitleBar.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.OOM" />
 
@@ -387,22 +403,25 @@
             android:name=".ui.SDScannerActivity"
             android:configChanges="keyboardHidden|orientation"
             android:icon="@drawable/sd"
-            android:label="SD Card Analyzer"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_sd"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Sense5" >
         </activity>
         <activity
             android:name=".ui.SDScannerActivityList"
             android:configChanges="keyboardHidden|orientation"
             android:icon="@drawable/sd"
-            android:label="SD Card Analyzer"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_sd"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Sense5" >
         </activity>
         <activity
             android:name=".ui.SDScannerConfigActivity"
             android:configChanges="keyboardHidden|orientation"
             android:icon="@drawable/sd"
-            android:label="SD Card Analyzer"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_sd"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.SD_ANALYZER" />
 
@@ -412,7 +431,8 @@
         <activity
             android:name=".ui.TISActivityChart"
             android:icon="@drawable/times"
-            android:label="@string/title_tis" >
+            android:label="@string/title_tis"
+            android:theme="@style/Theme.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.TIMES_CHART" />
 
@@ -422,6 +442,7 @@
         <activity
             android:name=".ui.FMActivity"
             android:icon="@drawable/folder"
+            android:theme="@style/Theme.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
         <activity
@@ -451,6 +472,7 @@
         <activity
             android:name=".shortcuts.Shortcuts"
             android:label="Kernel Tuner - Shortcuts"
+            android:theme="@style/Theme.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -544,7 +566,8 @@
 
         <activity
             android:name="rs.pedjaapps.KernelTuner.ui.BackupRestore"
-            android:label="Backup/Restore" >
+            android:label="@string/title_backup_restore"
+            android:theme="@style/Theme.Sense5" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.ui.BackupRestore" />
 
@@ -558,8 +581,9 @@
             android:name=".ui.LogCat"
             android:configChanges="keyboardHidden|orientation"
             android:icon="@drawable/log"
-            android:label="LogCat"
+            android:label="@string/info_logs_title"
             android:launchMode="singleTop"
+            android:theme="@style/Theme.Sense5"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="rs.pedjaapps.KernelTuner.LOGCAT" />

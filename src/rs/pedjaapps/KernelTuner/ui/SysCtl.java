@@ -32,9 +32,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import com.stericson.RootTools.RootTools;
@@ -52,9 +54,7 @@ import rs.pedjaapps.KernelTuner.helpers.DatabaseHandler;
 import rs.pedjaapps.KernelTuner.helpers.SysCtlAdapter;
 import rs.pedjaapps.KernelTuner.tools.Tools;
 
-
-
-public class SysCtl extends Activity
+public class SysCtl extends SherlockActivity
 {
 	GridView sysListView;
 	SysCtlAdapter sysAdapter;
@@ -70,14 +70,12 @@ public class SysCtl extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 	    preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		String theme = preferences.getString("theme", "light");
-
-		setTheme(Tools.getPreferedTheme(theme));
+		
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.sysctl);
 		
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		/**
 		 * Load ads if enabled in settings*/
 		final boolean ads = preferences.getBoolean("ads", true);

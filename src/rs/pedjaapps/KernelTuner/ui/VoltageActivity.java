@@ -18,7 +18,6 @@
 */
 package rs.pedjaapps.KernelTuner.ui;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -28,12 +27,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import java.io.File;
@@ -49,7 +51,7 @@ import rs.pedjaapps.KernelTuner.helpers.VoltageAdapter;
 import rs.pedjaapps.KernelTuner.tools.ChangeVoltage;
 import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class VoltageActivity extends Activity
+public class VoltageActivity extends SherlockActivity
 {
 
 	private static VoltageAdapter voltageAdapter ;
@@ -63,17 +65,12 @@ boolean isLight;
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		
-		String theme = preferences.getString("theme", "light");
-		
-		setTheme(Tools.getPreferedTheme(theme));
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.voltage);
 		
 		
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);

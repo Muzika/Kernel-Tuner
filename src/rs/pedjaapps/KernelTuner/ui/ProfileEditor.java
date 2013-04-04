@@ -18,22 +18,25 @@
 */
 package rs.pedjaapps.KernelTuner.ui;
 
-import android.app.Activity;
 import android.content.*;
 import android.os.*;
-import android.preference.*;
-import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
 import java.util.*;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 import rs.pedjaapps.KernelTuner.*;
 import rs.pedjaapps.KernelTuner.entry.*;
 import rs.pedjaapps.KernelTuner.helpers.*;
 
+import android.view.View;
 import android.view.View.OnClickListener;
-import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class ProfileEditor extends Activity
+public class ProfileEditor extends SherlockActivity
 {
 	
 	
@@ -95,11 +98,7 @@ public class ProfileEditor extends Activity
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		String theme = preferences.getString("theme", "light");
-		
-		setTheme(Tools.getPreferedTheme(theme));
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.profile_editor);
@@ -875,7 +874,7 @@ public class ProfileEditor extends Activity
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.profile_editor_options_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 }

@@ -20,8 +20,6 @@ package rs.pedjaapps.KernelTuner.ui;
 
 import java.io.*;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -32,7 +30,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
@@ -44,11 +41,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
+
 import rs.pedjaapps.KernelTuner.ui.BackupRestore;
 import rs.pedjaapps.KernelTuner.R;
 import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class BackupRestore extends Activity
+public class BackupRestore extends SherlockActivity
  {
 
 	
@@ -162,14 +164,9 @@ public class BackupRestore extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		SharedPreferences sharedPrefs = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		String them = sharedPrefs.getString("theme", "light");
-
-		setTheme(Tools.getPreferedTheme(them));
 		
 		setContentView(R.layout.backup_restore);
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		Button backup = (Button) findViewById(R.id.backup);
 		Button restore = (Button) findViewById(R.id.restore);

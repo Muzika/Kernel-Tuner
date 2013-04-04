@@ -18,8 +18,6 @@
 */
 package rs.pedjaapps.KernelTuner.ui;
 
-
-
 import android.app.*;
 import android.content.*;
 import android.content.DialogInterface.*;
@@ -27,9 +25,13 @@ import android.graphics.*;
 import android.os.*;
 import android.preference.*;
 import android.util.*;
-import android.view.*;
+import android.view.View;
 import android.view.ViewGroup.*;
 import android.widget.*;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.*;
 import java.io.*;
 import java.util.*;
@@ -41,7 +43,7 @@ import rs.pedjaapps.KernelTuner.entry.*;
 import java.lang.Process;
 import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class SDScannerActivity extends Activity
+public class SDScannerActivity extends SherlockActivity
 {
 
 	
@@ -104,48 +106,11 @@ public class SDScannerActivity extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		
-		String theme = preferences.getString("theme", "light");
-		
-		if (theme.equals("light")) 
-		{
-			setTheme(android.R.style.Theme_Holo_Light);
-			labelColor = Color.BLACK;
-		} 
-		else if (theme.equals("dark")) 
-		{
-			setTheme(android.R.style.Theme_Holo);
-			labelColor = Color.WHITE;
-		} 
-		else if (theme.equals("light_dark_action_bar")) 
-		{
-			setTheme(android.R.style.Theme_Holo_Light_DarkActionBar);
-			labelColor = Color.BLACK;
-		}
-		else if (theme.equals("miui_light")) 
-		{
-			setTheme(R.style.Theme_Miui_Light);
-			labelColor = Color.BLACK;
-		} 
-		else if (theme.equals("miui_dark")) 
-		{
-			setTheme(R.style.Theme_Miui_Dark);
-			labelColor = Color.WHITE;
-		} 
-		else if (theme.equals("sense5")) 
-		{
-			setTheme(R.style.Theme_Sense5);
-			labelColor = Color.WHITE;
-		}
-		else if (theme.equals("sense5_light")) 
-		{
-			setTheme(R.style.Theme_Light_Sense5);
-			labelColor = Color.BLACK;
-		}
+		labelColor = Color.WHITE;
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.sd_scanner);
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		mRenderer.setApplyBackgroundColor(true);
 	    mRenderer.setBackgroundColor(Color.argb(100, 50, 50, 50));

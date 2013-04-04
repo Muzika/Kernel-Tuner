@@ -29,7 +29,6 @@ import android.content.SharedPreferences;
 import android.os.StatFs;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import rs.pedjaapps.KernelTuner.R;
 import rs.pedjaapps.KernelTuner.entry.SysCtlDatabaseEntry;
 import rs.pedjaapps.KernelTuner.helpers.DatabaseHandler;
 import rs.pedjaapps.KernelTuner.helpers.IOHelper;
@@ -267,73 +266,7 @@ public class Tools
 		return timeString;
 	}
 
-	public static int getPreferedTheme(String theme)
-	{
-		if (theme.equals("light")) 
-		{
-			return android.R.style.Theme_Holo_Light;
-		} 
-		else if (theme.equals("dark")) 
-		{
-			return android.R.style.Theme_Holo;
-		} 
-		else if (theme.equals("light_dark_action_bar")) 
-		{
-			return android.R.style.Theme_Holo_Light_DarkActionBar;
-		}
-		else if (theme.equals("miui_light")) 
-		{
-			return R.style.Theme_Miui_Light;
-		} 
-		else if (theme.equals("miui_dark")) 
-		{
-			return R.style.Theme_Miui_Dark;
-		} 
-		else if (theme.equals("sense5")) 
-		{
-			return R.style.Theme_Sense5;
-		}
-		else if (theme.equals("sense5_light")) 
-		{
-			return R.style.Theme_Light_Sense5;
-		}
-		else
-		{
-			return android.R.style.Theme_Holo_Light_DarkActionBar;
-		}
-	}
-
-	public static int getPreferedThemeTranslucent(String theme)
-	{
-		if (theme.equals("light")) 
-		{
-			return R.style.Theme_Translucent_NoTitleBar_Light;
-		} 
-		else if (theme.equals("dark")) 
-		{
-			return R.style.Theme_Translucent_NoTitleBar;
-		} 
-		else if (theme.equals("miui_light")) 
-		{
-			return R.style.Theme_Translucent_NoTitleBar_Miui_Light;
-		} 
-		else if (theme.equals("miui_dark")) 
-		{
-			return R.style.Theme_Translucent_NoTitleBar_Miui;
-		} 
-		else if (theme.equals("sense5")) 
-		{
-			return R.style.Theme_Translucent_NoTitleBar_Sense5;
-		}
-		else if (theme.equals("sense5_light")) 
-		{
-			return R.style.Theme_Translucent_NoTitleBar_Sense5_Light;
-		}
-		else
-		{
-			return R.style.Theme_Translucent_NoTitleBar_Light;
-		}
-	}
+	
 	
 	public static String getAbi(){
 		String abi = android.os.Build.CPU_ABI;

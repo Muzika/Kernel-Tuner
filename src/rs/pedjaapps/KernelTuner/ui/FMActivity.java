@@ -18,14 +18,9 @@
  */
 package rs.pedjaapps.KernelTuner.ui;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -35,6 +30,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+
 
 import rs.pedjaapps.KernelTuner.R;
 import rs.pedjaapps.KernelTuner.entry.FMEntry;
@@ -42,7 +41,7 @@ import rs.pedjaapps.KernelTuner.helpers.FMAdapter;
 import android.content.Context;
 import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class FMActivity extends Activity
+public class FMActivity extends SherlockActivity
 {
 	List<FMEntry> e;
 	String path;
@@ -55,10 +54,7 @@ public class FMActivity extends Activity
 		c = this;
         super.onCreate(savedInstanceState);
        
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String theme = prefs.getString("theme", "light");
-		setTheme(Tools.getPreferedTheme(theme));
-		 setContentView(R.layout.fm);
+        setContentView(R.layout.fm);
 		fListView = (GridView) findViewById(R.id.list);
 		
 		path = Environment.getExternalStorageDirectory().toString();
@@ -73,7 +69,7 @@ public class FMActivity extends Activity
 			fAdapter.add(entry);
 		}
 
-		getActionBar().setTitle(path);
+		getSupportActionBar().setTitle(path);
 		fListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
 
@@ -91,7 +87,7 @@ public class FMActivity extends Activity
 						}
 					}
 					fAdapter.notifyDataSetChanged();
-					getActionBar().setTitle(path);
+					getSupportActionBar().setTitle(path);
 				}
 
 			});
@@ -155,7 +151,7 @@ public class FMActivity extends Activity
 				fAdapter.add(entry);
 			}
 			fAdapter.notifyDataSetChanged();
-			getActionBar().setTitle(path);
+			getSupportActionBar().setTitle(path);
 		}
 	}
 	

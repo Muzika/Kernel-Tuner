@@ -18,17 +18,26 @@
 */
 package rs.pedjaapps.KernelTuner.ui;
 
-import android.app.*;
+import android.app.ProgressDialog;
 import android.content.*;
 import android.os.*;
 import android.preference.*;
-import android.view.*;
+import android.view.WindowManager;
 import android.widget.*;
 import android.widget.AdapterView.*;
+import android.view.View;
 import android.widget.CompoundButton.*;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.*;
 import com.stericson.RootTools.RootTools;
 import com.stericson.RootTools.execution.CommandCapture;
+
+import de.ankri.views.Switch;
 
 import java.io.*;
 import java.util.*;
@@ -38,9 +47,8 @@ import org.apache.commons.io.FileUtils;
 
 import rs.pedjaapps.KernelTuner.R;
 import rs.pedjaapps.KernelTuner.Constants;
-import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class MpdecisionNew extends Activity
+public class MpdecisionNew extends SherlockActivity
 {
 
 	
@@ -175,9 +183,6 @@ public class MpdecisionNew extends Activity
 	{
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		String theme = preferences.getString("theme", "light");
-		
-		setTheme(Tools.getPreferedTheme(theme));
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.mpdecision_new);
@@ -194,7 +199,7 @@ public class MpdecisionNew extends Activity
 			freqNames.add(f.getFreqName());
 		}
 		
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		boolean ads = preferences.getBoolean("ads", true);
 		if (ads == true)
@@ -438,7 +443,7 @@ public class MpdecisionNew extends Activity
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
+		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.misc_tweaks_options_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 }

@@ -1,11 +1,13 @@
 package rs.pedjaapps.KernelTuner.fragments;
 
 import java.util.List;
+
+import com.actionbarsherlock.app.SherlockListFragment;
+
 import rs.pedjaapps.KernelTuner.R;
 import rs.pedjaapps.KernelTuner.entry.TMEntry;
 import rs.pedjaapps.KernelTuner.helpers.TMAdapter;
 import android.app.Activity;
-import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -25,7 +27,7 @@ import android.widget.ListView;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class TMListFragment extends ListFragment {
+public class TMListFragment extends SherlockListFragment {
 
 	/**
 	 * The serialization (saved instance state) Bundle key representing the

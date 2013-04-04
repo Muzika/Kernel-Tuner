@@ -28,8 +28,6 @@ import rs.pedjaapps.KernelTuner.R;
 import rs.pedjaapps.KernelTuner.helpers.IOHelper;
 import rs.pedjaapps.KernelTuner.tools.ChangeGovernor;
 import rs.pedjaapps.KernelTuner.tools.FrequencyChanger;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,26 +35,23 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.*;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import com.stericson.RootTools.RootTools;
 import com.stericson.RootTools.execution.CommandCapture;
 
 import android.content.Context;
-import rs.pedjaapps.KernelTuner.tools.Tools;
 
-
-
-
-public class CPUActivity extends Activity
+public class CPUActivity extends SherlockActivity
 {
 
 	private List<IOHelper.FreqsEntry>          freqEntries;
@@ -157,17 +152,13 @@ public class CPUActivity extends Activity
 		c = this;
 		mHandler = new Handler();
 		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
-		
-		final String theme = sharedPrefs.getString("theme", "light");
-		
-		setTheme(Tools.getPreferedTheme(theme));
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.cpu_tweaks);
 		mhz = getResources().getString(R.string.mhz);
 		/**
 		 * Show Progress Dialog and execute ToggleCpus class*/
-		final ActionBar actionBar = getActionBar();
+		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		pd = ProgressDialog.show(c, null, 
 				  getResources().getString(R.string.enabling_cpus), true, false);

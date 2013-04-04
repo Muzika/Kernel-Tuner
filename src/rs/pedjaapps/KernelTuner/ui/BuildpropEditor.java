@@ -19,8 +19,6 @@
 package rs.pedjaapps.KernelTuner.ui;
 
 import java.io.*;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -34,14 +32,16 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import com.stericson.RootTools.RootTools;
@@ -57,7 +57,7 @@ import rs.pedjaapps.KernelTuner.tools.Tools;
 
 
 
-public class BuildpropEditor extends Activity
+public class BuildpropEditor extends SherlockActivity
 {
 	
 	ListView bListView;
@@ -72,14 +72,12 @@ public class BuildpropEditor extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 	    preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		String theme = preferences.getString("theme", "light");
-
-		setTheme(Tools.getPreferedTheme(theme));
+		
 		
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.build);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		/**
 		 * Load ads if enabled in settings*/
 		final boolean ads = preferences.getBoolean("ads", true);
@@ -89,24 +87,6 @@ public class BuildpropEditor extends Activity
 			adView.loadAd(new AdRequest());
 		}
 		
-/*
-		kernel = (CheckBox)findViewById(R.id.kernel);
-		vm = (CheckBox)findViewById(R.id.vm);
-		fs = (CheckBox)findViewById(R.id.fs);
-		net = (CheckBox)findViewById(R.id.net);
-
-		kernel.setChecked(preferences.getBoolean("sysctl_kernel", true));
-		vm.setChecked(preferences.getBoolean("sysctl_vm", true));
-		fs.setChecked(preferences.getBoolean("sysctl_fs", true));
-		net.setChecked(preferences.getBoolean("sysctl_net", false));
-
-		kernel.setOnCheckedChangeListener(new Listener());
-		net.setOnCheckedChangeListener(new Listener());
-		vm.setOnCheckedChangeListener(new Listener());
-		fs.setOnCheckedChangeListener(new Listener());
-*/
-
-
 		bListView = (ListView) findViewById(R.id.list);
 		bAdapter = new BuildAdapter(this, R.layout.build_row);
 		bListView.setAdapter(bAdapter);

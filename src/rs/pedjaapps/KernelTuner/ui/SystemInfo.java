@@ -19,7 +19,8 @@
 package rs.pedjaapps.KernelTuner.ui;
 
 import android.annotation.SuppressLint;
-import android.app.*;
+import android.app.ActivityManager;
+import android.app.ProgressDialog;
 import android.app.ActivityManager.*;
 import android.content.*;
 import android.content.pm.*;
@@ -27,17 +28,28 @@ import android.graphics.*;
 import android.hardware.*;
 import android.os.*;
 import android.preference.*;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.*;
-import android.view.*;
+import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import java.io.*;
 import java.util.*;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
+
 import rs.pedjaapps.KernelTuner.helpers.*;
 
 import rs.pedjaapps.KernelTuner.R;
 import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class SystemInfo extends Activity implements
+public class SystemInfo extends SherlockFragmentActivity implements
 		ActionBar.TabListener {
 
 	private Integer gpu2d;
@@ -151,7 +163,7 @@ public class SystemInfo extends Activity implements
 			manufacturer = android.os.Build.MANUFACTURER;
 			bootloader = android.os.Build.BOOTLOADER;
 			hardware = android.os.Build.HARDWARE;
-			radio = android.os.Build.getRadioVersion();
+			radio = android.os.Build.RADIO;
 			
 			board = android.os.Build.BOARD;
 			brand = android.os.Build.BRAND;
@@ -177,11 +189,10 @@ public class SystemInfo extends Activity implements
 			numberOfInstalledApps = userApps.size();
 			numberOfSystemApps = systemApps.size();
 			Display display = getWindowManager().getDefaultDisplay();
-			Point size = new Point();
+			
 
-			display.getSize(size);
-				screenRezolution = size.x + "x"
-						+ size.y;
+			screenRezolution = display.getWidth() + "x"
+					+ display.getHeight();
 			
 			screenRefreshRate = display.getRefreshRate()
 					+ "fps";
@@ -320,11 +331,7 @@ public class SystemInfo extends Activity implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-	
-		String theme = preferences.getString("theme", "light");
 		
-		setTheme(Tools.getPreferedTheme(theme));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.system_info);
 		unknown = getResources().getString(R.string.unknown);
@@ -333,7 +340,7 @@ public class SystemInfo extends Activity implements
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		tempPref = prefs.getString("temp", "celsius");
 		// Set up the action bar to show tabs.
-		actionBar = getActionBar();
+		actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setHomeButtonEnabled(true);
 		m_sensormgr = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -361,20 +368,11 @@ public class SystemInfo extends Activity implements
 
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
-		// Restore the previously serialized current tab position.
-		/*if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM))
-	{
-			getSupportActionBar().setSelectedNavigationItem(
-					savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
-				System.out.println("tab count restore"+getSupportActionBar().getNavigationItemCount());
-		}*/
+		
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		// Serialize the current tab position.
-		/*outState.putInt("tr", getSupportActionBar()
-				.getSelectedNavigationIndex());*/
 		
 	}
 
@@ -396,7 +394,7 @@ public class SystemInfo extends Activity implements
 			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, 3);
 		}
 		fragment.setArguments(args);
-		getFragmentManager().beginTransaction()
+		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment).commitAllowingStateLoss();
 		
 	}
@@ -873,7 +871,7 @@ public class SystemInfo extends Activity implements
 		case Sensor.TYPE_PROXIMITY:
 			snsType = "TYPE_PROXIMITY";
 			break;
-		case Sensor.TYPE_AMBIENT_TEMPERATURE:
+		case Sensor.TYPE_TEMPERATURE:
 			snsType = "TYPE_TEMPERATURE";
 			break;
 		default:
@@ -963,7 +961,7 @@ public class SystemInfo extends Activity implements
 				pb_presA.setProgress(Math.abs((int) event.values[0]));
 				tv_presA.setText(String.format("%.2f", event.values[0]));
 			}
-			if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+			if (event.sensor.getType() == Sensor.TYPE_TEMPERATURE) {
 				tempAccu.setText(accuracy);
 				pb_tempA.setProgress(Math.abs((int) event.values[0]));
 				tv_tempA.setText(String.format("%.2f", event.values[0]));
@@ -992,11 +990,7 @@ public class SystemInfo extends Activity implements
 				tv_gyroscopeB.setText(String.format("%.2f", event.values[1]));
 				tv_gyroscopeC.setText(String.format("%.2f", event.values[2]));
 			}
-			if (event.sensor.getType() == Sensor.TYPE_RELATIVE_HUMIDITY) {
-				humAccu.setText(accuracy);
-				pb_humidity_A.setProgress(Math.abs((int) event.values[0]));
-				tv_humidity_A.setText(String.format("%.2f", event.values[0]));
-			}
+			
 		}
 
 		@Override
@@ -1068,7 +1062,7 @@ public class SystemInfo extends Activity implements
 					m_sensormgr.registerListener(senseventListener, snsr,
 							SensorManager.SENSOR_DELAY_NORMAL);
 				}
-				if (snsr.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+				if (snsr.getType() == Sensor.TYPE_TEMPERATURE) {
 
 					tempHead.setText(getSensorInfo(snsr));
 					pb_tempA.setMax((int) (snsr.getMaximumRange()));
@@ -1099,13 +1093,7 @@ public class SystemInfo extends Activity implements
 					m_sensormgr.registerListener(senseventListener, snsr,
 												 SensorManager.SENSOR_DELAY_NORMAL);
 				}
-				if (snsr.getType() == Sensor.TYPE_RELATIVE_HUMIDITY) {
-
-					humHead.setText(getSensorInfo(snsr));
-					pb_humidity_A.setMax((int) (snsr.getMaximumRange()));
-					m_sensormgr.registerListener(senseventListener, snsr,
-												 SensorManager.SENSOR_DELAY_NORMAL);
-				}
+				
 
 			}
 		}

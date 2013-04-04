@@ -23,25 +23,23 @@ import android.content.*;
 import android.os.*;
 import android.preference.*;
 import android.text.*;
-import android.util.*;
 import android.view.*;
 import android.view.ContextMenu.*;
 import android.widget.*;
 import android.widget.SeekBar.*;
-import java.io.*;
 import java.util.*;
 import rs.pedjaapps.KernelTuner.*;
 import rs.pedjaapps.KernelTuner.helpers.*;
 
 import android.view.View.OnClickListener;
-import java.lang.Process;
 
+import com.actionbarsherlock.app.SherlockActivity;
 import com.stericson.RootTools.RootTools;
 import com.stericson.RootTools.execution.CommandCapture;
 
 import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class OOM extends Activity {
+public class OOM extends SherlockActivity {
 
 	private SeekBar foregroundSeek;
 	private SeekBar visibleSeek;
@@ -67,34 +65,7 @@ public class OOM extends Activity {
 	private ProgressDialog pd;
 	boolean isLight;
 	public void onCreate(Bundle savedInstanceState) {
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		String theme = preferences.getString("theme", "light");
-		
-		if (theme.equals("light")) 
-		{
-			setTheme(R.style.Theme_Translucent_NoTitleBar_Light);
-		} 
-		else if (theme.equals("dark")) 
-		{
-			setTheme(R.style.Theme_Translucent_NoTitleBar);
-		} 
-		else if (theme.equals("miui_light")) 
-		{
-			setTheme(R.style.Theme_Translucent_NoTitleBar_Miui_Light);
-		} 
-		else if (theme.equals("miui_dark")) 
-		{
-			setTheme(R.style.Theme_Translucent_NoTitleBar_Miui);
-		} 
-		else if (theme.equals("sense5")) 
-		{
-			setTheme(R.style.Theme_Translucent_NoTitleBar_Sense5);
-		}
-		else if (theme.equals("sense5_light")) 
-		{
-			setTheme(R.style.Theme_Translucent_NoTitleBar_Sense5_Light);
-		}
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.oom);
 		oom = IOHelper.oom();

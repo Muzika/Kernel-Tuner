@@ -22,8 +22,6 @@ import android.content.*;
 import android.widget.*;
 import java.io.*;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.app.AlertDialog;
@@ -40,11 +38,14 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import com.stericson.RootTools.RootTools;
@@ -60,7 +61,7 @@ import rs.pedjaapps.KernelTuner.tools.Tools;
 
 
 
-public class KernelTuner extends Activity {
+public class KernelTuner extends SherlockActivity {
 
 	private List<IOHelper.FreqsEntry>   freqEntries;
 	private List<IOHelper.VoltageList>  voltageFreqs;
@@ -158,11 +159,11 @@ public class KernelTuner extends Activity {
 
 		minimal = preferences.getBoolean("main_style",false);
 		if(minimal == true){
-			setTheme(Tools.getPreferedThemeTranslucent(theme));
+			setTheme(R.style.Theme_Translucent_NoTitleBar_Sense5);
 			setContentView(R.layout.main_popup);
 		}
 		else{
-			setTheme(Tools.getPreferedTheme(theme));
+			setTheme(R.style.Theme_Sense5);
 			setContentView(R.layout.main);
 		}
 		super.onCreate(savedInstanceState);
@@ -209,7 +210,7 @@ public class KernelTuner extends Activity {
 	    	batteryTemp = (TextView) findViewById(R.id.textView40);
 	    	tempLayout = (RelativeLayout) findViewById(R.id.test1a);
 			
-		    ActionBar actionBar = getActionBar();
+		    ActionBar actionBar = getSupportActionBar();
 	    	actionBar.setSubtitle("Various kernel and system tuning");
 	    	actionBar.setHomeButtonEnabled(false);
 		

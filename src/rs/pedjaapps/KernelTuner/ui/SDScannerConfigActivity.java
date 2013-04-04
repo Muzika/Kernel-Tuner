@@ -18,7 +18,6 @@
 */
 package rs.pedjaapps.KernelTuner.ui;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -29,13 +28,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.*;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
+
+import de.ankri.views.Switch;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -53,7 +56,7 @@ import rs.pedjaapps.KernelTuner.ui.SDScannerActivity;
 import rs.pedjaapps.KernelTuner.ui.SDScannerConfigActivity;
 import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class SDScannerConfigActivity extends Activity
+public class SDScannerConfigActivity extends SherlockActivity
 {
 
 	private Switch sw;
@@ -85,43 +88,7 @@ public class SDScannerConfigActivity extends Activity
 	{
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		String theme = preferences.getString("theme", "light");
-		
-		if (theme.equals("light")) 
-		{
-			setTheme(android.R.style.Theme_Holo_Light);
-			labelColor = Color.BLACK;
-		} 
-		else if (theme.equals("dark")) 
-		{
-			setTheme(android.R.style.Theme_Holo);
-			labelColor = Color.WHITE;
-		} 
-		else if (theme.equals("light_dark_action_bar")) 
-		{
-			setTheme(android.R.style.Theme_Holo_Light_DarkActionBar);
-			labelColor = Color.BLACK;
-		}
-		else if (theme.equals("miui_light")) 
-		{
-			setTheme(R.style.Theme_Miui_Light);
-			labelColor = Color.BLACK;
-		} 
-		else if (theme.equals("miui_dark")) 
-		{
-			setTheme(R.style.Theme_Miui_Dark);
-			labelColor = Color.WHITE;
-		} 
-		else if (theme.equals("sense5")) 
-		{
-			setTheme(R.style.Theme_Sense5);
-			labelColor = Color.WHITE;
-		}
-		else if (theme.equals("sense5_light")) 
-		{
-			setTheme(R.style.Theme_Light_Sense5);
-			labelColor = Color.BLACK;
-		}
+		labelColor = Color.WHITE;
 		super.onCreate(savedInstanceState);
 
 		boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
@@ -138,7 +105,7 @@ public class SDScannerConfigActivity extends Activity
 				  getResources().getString(R.string.archives)};
 		icons = new int[] {R.drawable.apk, R.drawable.movie, R.drawable.music, R.drawable.img, R.drawable.doc, R.drawable.arch};
 		CALCULATING =  getResources().getString(R.string.sd_calculating);
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		final SharedPreferences.Editor editor = preferences.edit();
 		boolean ads = preferences.getBoolean("ads", true);
@@ -250,13 +217,8 @@ public class SDScannerConfigActivity extends Activity
 		summaryAdapter.add(new SDSummaryEntry(names[3], CALCULATING, 0, 0, icons[3]));
 		summaryAdapter.add(new SDSummaryEntry(names[4], CALCULATING, 0, 0, icons[4]));
 		summaryAdapter.add(new SDSummaryEntry(names[5], CALCULATING, 0, 0, icons[5]));
-		int apiLevel = Build.VERSION.SDK_INT;
-		if(apiLevel <= android.os.Build.VERSION_CODES.HONEYCOMB){
 		scanSDCard.execute();
-		}
-		else{
-			scanSDCard.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		}
+		
 	}
 
 	@Override

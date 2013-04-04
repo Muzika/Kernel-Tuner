@@ -19,14 +19,17 @@
 package rs.pedjaapps.KernelTuner.ui;
 
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.*;
 import android.graphics.*;
 import android.os.*;
 import android.preference.*;
-import android.view.*;
+import android.view.View;
 import android.widget.*;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.*;
 import java.util.*;
 import org.achartengine.*;
@@ -40,7 +43,7 @@ import android.view.ViewGroup.LayoutParams;
 import rs.pedjaapps.KernelTuner.R;
 import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class TISActivityChart extends Activity
+public class TISActivityChart extends SherlockActivity
 {
 
 	private List<TimesEntry> times;
@@ -98,14 +101,12 @@ public class TISActivityChart extends Activity
 	{
 		times = IOHelper.getTis();
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		String theme = preferences.getString("theme", "light");
 		
-		setTheme(Tools.getPreferedTheme(theme));
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.tis_chart);
 		
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		mRenderer.setApplyBackgroundColor(true);
 	    mRenderer.setBackgroundColor(Color.argb(100, 50, 50, 50));

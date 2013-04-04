@@ -29,9 +29,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
@@ -39,6 +36,12 @@ import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import java.io.BufferedReader;
@@ -59,7 +62,7 @@ import rs.pedjaapps.KernelTuner.tools.Tools;
 import android.app.Activity;
 import android.app.ActivityManager;
 
-public class TaskManager extends Activity implements TMListFragment.Callbacks
+public class TaskManager extends SherlockFragmentActivity implements TMListFragment.Callbacks
 {
 	
 	
@@ -90,17 +93,16 @@ public class TaskManager extends Activity implements TMListFragment.Callbacks
 	public void onCreate(Bundle savedInstanceState)
 	{
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		String theme = preferences.getString("theme", "light");
-		setTheme(Tools.getPreferedTheme(theme));
+		
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.activity_tm_list);
 
-		getActionBar().setTitle(getResources().getString(R.string.title_task_manager));
-		getActionBar().setSubtitle(null);
-		getActionBar().setIcon(R.drawable.tm);
+		getSupportActionBar().setTitle(getResources().getString(R.string.title_task_manager));
+		getSupportActionBar().setSubtitle(null);
+		getSupportActionBar().setIcon(R.drawable.tm);
 		
 		View customNav = LayoutInflater.from(this).inflate(R.layout.ram_layout, null);
 
@@ -108,8 +110,8 @@ public class TaskManager extends Activity implements TMListFragment.Callbacks
 		((TextView)customNav.findViewById(R.id.total)).setText(getResources().getString(R.string.mem_free)+ getTotalRAM()+"MB");
 
         //Attach to the action bar
-        getActionBar().setCustomView(customNav);
-        getActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(customNav);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
 		
 		if (findViewById(R.id.process_detail_container) != null) {
 			// The detail container view will be present only in the
@@ -120,7 +122,7 @@ public class TaskManager extends Activity implements TMListFragment.Callbacks
 
 			// In two-pane mode, list items should be given the
 			// 'activated' state when touched.
-			((TMListFragment) getFragmentManager()
+			((TMListFragment) getSupportFragmentManager()
 					.findFragmentById(R.id.process_list))
 					.setActivateOnItemClick(true);
 		}
@@ -146,7 +148,7 @@ public class TaskManager extends Activity implements TMListFragment.Callbacks
 			arguments.putInt(TMDetailFragment.ARG_ITEM_ID, id);
 			TMDetailFragment fragment = new TMDetailFragment();
 			fragment.setArguments(arguments);
-			getFragmentManager().beginTransaction()
+			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.process_detail_container, fragment).commit();
 
 		} else {

@@ -37,10 +37,6 @@ public class About extends Activity
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		String theme = preferences.getString("theme", "light");
-		
-		setTheme(Tools.getPreferedThemeTranslucent(theme));
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about);

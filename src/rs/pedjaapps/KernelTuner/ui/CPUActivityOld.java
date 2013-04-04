@@ -18,15 +18,12 @@
 */
 package rs.pedjaapps.KernelTuner.ui;
 
-
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -37,6 +34,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.stericson.RootTools.RootTools;
 import com.stericson.RootTools.execution.CommandCapture;
 
@@ -47,7 +46,7 @@ import rs.pedjaapps.KernelTuner.tools.ChangeGovernor;
 import rs.pedjaapps.KernelTuner.tools.FrequencyChanger;
 import android.content.Context;
 
-public class CPUActivityOld extends Activity
+public class CPUActivityOld extends SherlockActivity
 {
 
 	private  List<IOHelper.FreqsEntry> freqEntries;
@@ -273,29 +272,7 @@ public class CPUActivityOld extends Activity
 	{
 		c = this;
 		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
-		
-		final String theme = sharedPrefs.getString("theme", "light");
-		
-		if(theme.equals("light")){
-			setTheme(R.style.Theme_Sherlock_Light_Dialog_NoTitleBar);
-		}
-		else if(theme.equals("dark")){
-			setTheme(R.style.Theme_Sherlock_Dialog_NoTitleBar);
-			
-		}
-		else if(theme.equals("light_dark_action_bar")){
-			setTheme(R.style.Theme_Sherlock_Light_Dialog_NoTitleBar);
-			
-		}
-		else if (theme.equals("miui_dark")) 
-		{
-			setTheme(R.style.Theme_Sherlock_Dialog_NoTitleBar);
-		} 
-		else if (theme.equals("sense5")) 
-		{
-			setTheme(R.style.Theme_Sherlock_Dialog_NoTitleBar);
-		}
-		
+
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.cpu_tweaks_old);

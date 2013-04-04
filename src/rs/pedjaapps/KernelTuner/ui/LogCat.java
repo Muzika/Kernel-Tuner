@@ -11,26 +11,24 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 
 
@@ -43,12 +41,9 @@ import rs.pedjaapps.KernelTuner.tools.Format;
 import rs.pedjaapps.KernelTuner.tools.LogSaver;
 import rs.pedjaapps.KernelTuner.tools.Prefs;
 import android.widget.Toast;
-import android.content.SharedPreferences;
-import rs.pedjaapps.KernelTuner.tools.Tools;
-import android.preference.PreferenceManager;
 import android.graphics.Color;
 
-public class LogCat extends ListActivity {
+public class LogCat extends SherlockListActivity {
 	public static final SimpleDateFormat LOG_DATE_FORMAT = new SimpleDateFormat(
 			"MMM d, yyyy HH:mm:ss ZZZZ");
 	private static final Executor EX = Executors.newCachedThreadPool();
@@ -138,19 +133,15 @@ public class LogCat extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		String theme = preferences.getString("theme", "light");
-
-		setTheme(Tools.getPreferedTheme(theme));
 		setContentView(R.layout.logcat);
 		
 		//getWindow().setTitle(getResources().getString(R.string.app_name));
 
-		getActionBar().setSubtitle("running");
+		getSupportActionBar().setSubtitle("running");
 		mThis = this;
 		mPrefs = new Prefs(this);
 
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		mLogList = (ListView) findViewById(android.R.id.list);
 		mLogList.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
@@ -491,7 +482,7 @@ public class LogCat extends ListActivity {
 		if (!mPlay) {
 			return;
 		}
-				getActionBar().setSubtitle("paused");
+				getSupportActionBar().setSubtitle("paused");
 		if (mLogcat != null) {
 			mLogcat.setPlay(false);
 			mPlay = false;
@@ -503,7 +494,7 @@ public class LogCat extends ListActivity {
 		if (mPlay) {
 			return;
 		}
-		getActionBar().setSubtitle("running");
+		getSupportActionBar().setSubtitle("running");
 		if (mLogcat != null) {
 			mLogcat.setPlay(true);
 			mPlay = true;

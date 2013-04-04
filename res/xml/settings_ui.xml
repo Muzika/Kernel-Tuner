@@ -4,17 +4,6 @@
 	android:summary=""
 	android:icon="@drawable/theme">
 
-
-
-	<ListPreference
-		android:key="theme"
-		android:defaultValue="light"
-		android:title="Application Theme"
-		android:summary=""
-		android:entries="@array/theme_entry"
-		android:entryValues="@array/theme_values"
-		android:dialogTitle="Select Theme" />
-
 	<ListPreference
 		android:entries="@array/tisNames"
 		android:entryValues="@array/tisValues"

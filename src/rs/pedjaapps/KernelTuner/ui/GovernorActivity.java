@@ -18,9 +18,6 @@
 */
 package rs.pedjaapps.KernelTuner.ui;
 
-
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,13 +26,16 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import java.io.BufferedReader;
@@ -51,9 +51,8 @@ import rs.pedjaapps.KernelTuner.helpers.IOHelper;
 import rs.pedjaapps.KernelTuner.helpers.GovernorSettingsAdapter;
 import rs.pedjaapps.KernelTuner.tools.ChangeGovernorSettings;
 import android.content.Context;
-import rs.pedjaapps.KernelTuner.tools.Tools;
 
-public class GovernorActivity extends Activity
+public class GovernorActivity extends SherlockActivity
 {
 
 	private GovernorSettingsAdapter govAdapter ;
@@ -71,15 +70,11 @@ public class GovernorActivity extends Activity
 		c = this;
 		availableGovs = IOHelper.availableGovs();
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(c);
-		
-		String theme = preferences.getString("theme", "light");
-		
-		setTheme(Tools.getPreferedTheme(theme));
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.governor_settings);
 		
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		boolean ads = preferences.getBoolean("ads", true);
